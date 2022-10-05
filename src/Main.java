@@ -63,26 +63,35 @@ public class Main {
 
         sc.close();
 
-        //Obter a lista de pessoas que são do signo X e tem mais de Y anos.
-        System.out.println("Pessoas do signo Câncer e maior de 20 anos: " + people.stream().filter(person -> person.getSign().toString().equals("Câncer")).filter(person -> person.getAge() > 20).collect(Collectors.toList()));
+        // Obter a lista de pessoas que são do signo X e tem mais de Y anos.
+        colorService.cyan("\nPessoas do signo Câncer e maior de 20 anos: ");
+        colorService.green("" + people.stream().filter(person -> person.getSign().toString().equals("Câncer")).filter(person -> person.getAge() > 20).collect(Collectors.toList()));
 
-        //Obter a lista e a quantidade de pessoas que são menor e maior de idade
-        System.out.println("Pessoas menores de idade: " + people.stream().filter(person -> person.getAge() < 18).collect(Collectors.toList()));
+        // Obter a lista e a quantidade de pessoas que são menor e maior de idade
+        colorService.cyan("\nPessoas menores de idade: ");
+        colorService.green("" + people.stream().filter(person -> person.getAge() < 18).collect(Collectors.toList()));
 
-        //Obter a lista de pessoas que pertencem a geração {}
-        System.out.println("Pessoas da geracão Z: " + people.stream().filter(person -> person.getGeneration() == Generation.Z).collect(Collectors.toList()));
+        // Obter a lista de pessoas que pertencem a geração {}
+        colorService.cyan("\nPessoas da geracão Z: ");
+        colorService.green("" + people.stream().filter(person -> person.getGeneration() == Generation.Z).collect(Collectors.toList()));
 
-        //Obter a lista de todas as pessoas e informar a idade delas na próxima copa do mundo
-        people.forEach(person -> System.out.println(person.getName() + " terá " + (person.getAge() + 4) + " anos"));
+        // Obter a lista de todas as pessoas e informar a idade delas na próxima copa do mundo
+        people.forEach(person -> {
+            colorService.cyan("\nNa próxima copa do mundo " + person.getName() + " terá ");
+            colorService.green((person.getAge() + 4) + " anos");
+        });
 
-        //Obter a pessoa mais velha e mais nova
-        System.out.println("Pessoa mais nova: " + people.stream().mapToInt(Person::getAge).min().orElse(-1));
-        System.out.println("Pessoa mais velha: " + people.stream().mapToInt(Person::getAge).max().orElse(-1));
+        // Obter a pessoa mais velha e mais nova
+        colorService.cyan("\nPessoa mais nova: ");
+        colorService.green("" + people.stream().mapToInt(Person::getAge).min().orElse(-1));
+        colorService.cyan("\nPessoa mais velha: ");
+        colorService.green("" + people.stream().mapToInt(Person::getAge).max().orElse(-1));
 
-        //Calcular a idade média e total das pessoas
-        int total = people.size();
-        System.out.println("Média das idades: " + people.stream().mapToInt(Person::getAge).average().orElse(-1));
-        System.out.println("Total de pessoas: " + total);
+        // Calcular a idade média e total das pessoas
+        colorService.cyan("\nMédia das idades: ");
+        colorService.green("" + Math.round(people.stream().mapToInt(Person::getAge).average().orElse(-1) * 100.0) / 100.0);
+        colorService.cyan("\nTotal de pessoas: ");
+        colorService.green("" + people.size());
 
     }
 }
